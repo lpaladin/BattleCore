@@ -13,7 +13,7 @@
 void LoadGameData()
 {
 	//pDataLoader->LoadDataFromLuaScript("GameData.lua");
-	pDataLoader->LoadDataFromLuaScript(pBattlefield->battleMode.lua_path.c_str());
+	pDataLoader->LoadDataFromJSON(pBattlefield->battleMode.json_path.c_str());
 }
 
 

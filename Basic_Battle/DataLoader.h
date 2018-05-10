@@ -3,7 +3,7 @@
 #include "Robot/Weapon/WeaponData.h"
 #include "Robot/Engine/EngineData.h"
 #include "Robot/Bullet/BulletData.h"
-//Lua脚本读取游戏数据 GameData.lua
+//JSON读取游戏数据 GameData.json
 //单例模式
 
 
@@ -77,29 +77,19 @@ class DataLoader
 {
 private:
 	//static DataLoader* m_Instance;
+	Json::Value *rawJson;
+	
 	DataVessel* GameData;
-	lua_State* pLuaState;
 	DataLoader();
 	DataLoader(const DataLoader&);
-	DataLoader& operator = (const DataLoader&);
+	DataLoader& operator = (const DataLoader&) = delete;
 	virtual ~DataLoader();
 	void Close();
+
 	template<typename T>
 	bool GetNumber(const char* varName,T& Dest);//仅适用于各种数
 	bool GetString(const char* varName, string& Dest);//仅适用于字符串
 
-	//!!!!!以下四个函数均假设table在栈顶！！！
-	/*----------------------------------------------*/
-	//仅适用于各种数的数组
-	template<typename T>
-	bool GetRawi_num(int key,T& result);
-	//仅适用于字符串数组
-	bool GetRawi_str(int key,string& result);
-	//同上
-	template<typename T>
-	bool SetRawi_num(int key, const T& value);
-	bool SetRawi_str(int key, string value);
-	/*----------------------------------------------*/
 
 	bool LoadStrArray(const char* arrayName, int maxNum, string* Dest);
 	template<typename T>
@@ -115,7 +105,7 @@ public:
 	
 	static DataLoader* getInstance();
 	DataVessel* GetGameData();
-	bool LoadDataFromLuaScript(const char* fileName);
+	bool LoadDataFromJSON(const char* fileName);
 	
 	void ConstructDataVector();
 	

@@ -21,16 +21,6 @@
 
 #include <algorithm>
 
-
-
-extern "C"
-{
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
-}
-
-
 #include <stdio.h>
 #include <iostream>
 
@@ -41,6 +31,7 @@ extern "C"
 
 
 // TODO: 在此处引用程序需要的其他头文件
+#include "jsoncpp/json.h"
 
 //#include "Common/2D/Vector2D.h"
 #include "Basic_Battle/Vector2D.h"

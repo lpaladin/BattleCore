@@ -28,7 +28,7 @@ public:
 
 	string map_name;		//地图文件路径，或!!!
 
-	string lua_path;
+	string json_path;
 	string xmlformat_path;
 
 	BattleMode():record_name("Record_tmp.txt")
@@ -39,7 +39,7 @@ public:
 		record=true;
 		statistics=false;
 		map_name = "!!!";
-		lua_path = "./GameData.lua";
+		json_path = "./GameData.json";
 		xmlformat_path = "./battle_xml_format.xml";
 		//debug_log=false;
 	}
@@ -94,7 +94,7 @@ public:
 
 			in>>map_name;
 
-			in>>lua_path;
+			in>>json_path;
 			in>>xmlformat_path;
 
 			in.close();
@@ -122,8 +122,10 @@ public:
 	string TimeString(/*...*/)
 	{
 		time_t t=time(0);
+		struct tm buf;
 		char tmp[25];
-		strftime(tmp,sizeof(tmp),"%y-%m-%d-%H-%M-%S",localtime(&t));
+		localtime_s(&buf, &t);
+		strftime(tmp,sizeof(tmp),"%y-%m-%d-%H-%M-%S", &buf);
 		string tmp2=tmp;
 
 		return tmp2;
